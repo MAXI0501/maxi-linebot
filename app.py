@@ -43,7 +43,15 @@ def ping():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    user_id = event.source.user_id
     text = event.message.text.strip()
+
+    # 只有管理員才能使用管理指令
+    if user_id != USER_ID:
+        line_bot_api.reply_message(event.reply_token,
+            TextSendMessage(text="你好！感謝您的訊息，我們會盡快回覆您。"))
+        return
+
     data = load_data()
 
     if text in ['報表', '業績', '本月業績']:
