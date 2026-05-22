@@ -8,8 +8,7 @@ import threading, time
 
 app = Flask(__name__)
 
-LINE_TOKEN = os.environ.get('LINE_TOKEN', '').strip()
-LINE_SECRET = os.environ.get('LINE_SECRET', '').strip()
+LINE_TOKEN = 'C3nKISYBAR67FIH0kBW4ZSiYEws6kVqPaUitkJO23JZfylSkHRFrrNkRyE4gzJC3HZWd59XyBAuCRw8tfYR3mQBY5Ge1UC9zco3Sk7puK2O45uFEmT+aanG0b5260Zl1n3CcXuTQiHXc3rrCU1O32AdB04t89/1O/w1cDnyilFU='LINE_SECRET = os.environ.get('LINE_SECRET', '').strip()
 GAS_URL = os.environ.get('GAS_URL', '').strip()
 USER_ID = os.environ.get('USER_ID', '').strip()
 
