@@ -8,10 +8,10 @@ import threading, time
 
 app = Flask(__name__)
 
-LINE_TOKEN = os.environ.get('LINE_TOKEN', '')
-LINE_SECRET = os.environ.get('LINE_SECRET', '')
-GAS_URL = os.environ.get('GAS_URL', '')
-USER_ID = os.environ.get('USER_ID', '')
+LINE_TOKEN = os.environ.get('LINE_TOKEN', '').strip()
+LINE_SECRET = os.environ.get('LINE_SECRET', '').strip()
+GAS_URL = os.environ.get('GAS_URL', '').strip()
+USER_ID = os.environ.get('USER_ID', '').strip()
 
 line_bot_api = LineBotApi(LINE_TOKEN)
 handler = WebhookHandler(LINE_SECRET)
