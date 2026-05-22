@@ -8,7 +8,8 @@ import threading, time
 
 app = Flask(__name__)
 
-LINE_TOKEN = 'C3nKISYBAR67FIH0kBW4ZSiYEws6kVqPaUitkJO23JZfylSkHRFrrNkRyE4gzJC3HZWd59XyBAuCRw8tfYR3mQBY5Ge1UC9zco3Sk7puK2O45uFEmT+aanG0b5260Zl1n3CcXuTQiHXc3rrCU1O32AdB04t89/1O/w1cDnyilFU='LINE_SECRET = os.environ.get('LINE_SECRET', '').strip()
+LINE_TOKEN = 'C3nKISYBAR67FIH0kBW4ZSiYEws6kVqPaUitkJO23JZfylSkHRFrrNkRyE4gzJC3HZWd59XyBAuCRw8tfYR3mQBY5Ge1UC9zco3Sk7puK2O45uFEmT+aanG0b5260Zl1n3CcXuTQiHXc3rrCU1O32AdB04t89/1O/w1cDnyilFU='
+LINE_SECRET = os.environ.get('LINE_SECRET', '').strip()
 GAS_URL = os.environ.get('GAS_URL', '').strip()
 USER_ID = os.environ.get('USER_ID', '').strip()
 
@@ -93,7 +94,6 @@ def handle_message(event):
                  "👥 客戶 → 客戶統計")
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply))
 
-# 排程提醒
 def check_reminders():
     while True:
         try:
@@ -101,7 +101,6 @@ def check_reminders():
             data = load_data()
             events = data.get('events', [])
             today = now.strftime('%Y-%m-%d')
-
             for e in events:
                 edate = str(e.get('date',''))[:10]
                 etime = str(e.get('time',''))
@@ -122,7 +121,6 @@ def check_reminders():
             pass
         time.sleep(60)
 
-# 早安提醒（每天早上9點）
 def morning_reminder():
     while True:
         try:
@@ -134,7 +132,6 @@ def morning_reminder():
                 today_events = [e for e in events if str(e.get('date',''))[:10] == today]
                 todos = data.get('todos', [])
                 pending = [t for t in todos if not t.get('done')]
-
                 msg = f"🌅 早安！今日 {now.strftime('%m/%d')} 摘要\n"
                 if today_events:
                     msg += f"\n📅 今日行程（{len(today_events)} 件）"
